@@ -17,4 +17,9 @@ func main() {
 
 	fmt.Println("deal deck")
 	afterDeck.print()
+
+	fmt.Println("read from file")
+	cards.saveToFile("cards")
+	c := readFromFile("cards")
+	c.print()
 }

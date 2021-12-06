@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -40,4 +42,16 @@ func (d deck) print() {
 	for i, card := range d {
 		fmt.Println(i, card)
 	}
+}
+
+func (d deck) saveToFile(filename string) {
+	s := strings.Join(d, ",")
+
+	ioutil.WriteFile(filename, []byte(s), 0666)
+}
+
+func readFromFile(filename string) deck {
+	bs, _ := ioutil.ReadFile(filename)
+
+	return strings.Split(string(bs), ",")
 }
