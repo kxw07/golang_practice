@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 type deck []string
 
@@ -17,6 +21,19 @@ func newDeck() deck {
 	}
 
 	return cards
+}
+
+func (d deck) shuffle() {
+	rand := rand.New(rand.NewSource(time.Now().Unix()))
+
+	for i := range d {
+		newPosition := rand.Intn(len(d) - 1)
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
+}
+
+func deal(d deck, length int) (deck, deck) {
+	return d[:length], d[length:]
 }
 
 func (d deck) print() {
